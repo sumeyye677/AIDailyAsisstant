@@ -1,45 +1,45 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import {Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {EntriesProvider} from './src/context/EntriesContext';
+import HomeScreen from './src/screens/HomeScreen';
+import HistoryScreen from './src/screens/HistoryScreen';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+const Tab = createBottomTabNavigator();
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+const App = () => {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <PaperProvider>
+      <EntriesProvider>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={{
+              tabBarActiveTintColor: '#6200ee',
+              tabBarInactiveTintColor: '#666',
+            }}>
+            <Tab.Screen
+              name="Günlük"
+              component={HomeScreen}
+              options={{
+                tabBarIcon: () => <Text style={{fontSize: 20}}>✍️</Text>,
+                headerTitle: 'AI Günlük Asistanım',
+              }}
+            />
+            <Tab.Screen
+              name="Geçmiş"
+              component={HistoryScreen}
+              options={{
+                tabBarIcon: () => <Text style={{fontSize: 20}}>📚</Text>,
+                headerTitle: 'Geçmiş Kayıtlar',
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </EntriesProvider>
+    </PaperProvider>
   );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+};
 
 export default App;

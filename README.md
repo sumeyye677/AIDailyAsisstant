@@ -1,97 +1,163 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# AI Günlük Asistanım 📝
 
-# Getting Started
+Kullanıcının yazdığı cümleleri AI ile analiz eden ve duygu durumuna göre öneriler sunan mobil uygulama.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🎯 Proje Özeti
 
-## Step 1: Start Metro
+Bu uygulama, kullanıcıların günlük duygularını yazmasına ve AI tarafından analiz edilmesine olanak tanır. Uygulama:
+- Duygu analizi yapar (pozitif/nötr/negatif)
+- Basit özet sunar
+- Kişiselleştirilmiş öneriler verir
+- Tüm kayıtları lokal olarak saklar
+- Haftalık özet gösterir
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🚀 Özellikler
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### ✅ Tamamlanan Özellikler
+- ✍️ Günlük girdi ekranı
+- 🤖 AI duygu analizi (Hugging Face API)
+- 📚 Geçmiş kayıtlar ekranı
+- 💾 Lokal veri saklama (AsyncStorage)
+- 📊 Haftalık özet istatistikleri
+- 🎨 Duygu durumuna göre renk değişimi
+- 📱 Offline çalışma desteği
 
-```sh
-# Using npm
-npm start
+## 🛠️ Teknolojiler
 
-# OR using Yarn
-yarn start
+| Kategori | Teknoloji |
+|----------|-----------|
+| Mobil Platform | React Native CLI (TypeScript) |
+| State Yönetimi | Context API |
+| AI Entegrasyonu | Hugging Face (distilbert-base-uncased-finetuned-sst-2-english) |
+| Veri Saklama | AsyncStorage |
+| UI Kütüphanesi | React Native Paper |
+| Navigasyon | React Navigation |
+
+## 📦 Kurulum
+
+### Gereksinimler
+- Node.js (v18 veya üzeri)
+- React Native CLI
+- Android Studio (Android için) veya Xcode (iOS için)
+- Java JDK 17
+
+### Adımlar
+
+1. Projeyi klonlayın:
+```bash
+git clone <repository-url>
+cd AIGunlukAsistani
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+2. Bağımlılıkları yükleyin:
+```bash
+npm install
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+3. iOS için (sadece macOS):
+```bash
+cd ios && pod install && cd ..
 ```
 
-Then, and every time you update your native dependencies, run:
+4. Uygulamayı çalıştırın:
 
-```sh
-bundle exec pod install
+Android için:
+```bash
+npx react-native run-android
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+iOS için:
+```bash
+npx react-native run-ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## 🤖 AI Modeli Hakkında
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+### Kullanılan Model
+**cardiffnlp/twitter-roberta-base-sentiment-latest**
 
-## Step 3: Modify your app
+- **Platform**: Hugging Face Inference API
+- **Maliyet**: Ücretsiz (API token gerekli)
+- **Görev**: Sentiment Analysis (Duygu Analizi)
+- **Çıktılar**: positive, neutral, negative
 
-Now that you have successfully run the app, let's make changes!
+### API Kurulumu
+1. [Hugging Face](https://huggingface.co/join) hesabı oluşturun
+2. Settings → Access Tokens → New Token (Read) oluşturun
+3. `src/services/aiService.ts` dosyasında `HF_TOKEN` değişkenine token'ınızı ekleyin
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### Fallback Mekanizması
+API çalışmazsa uygulama otomatik olarak lokal keyword-based analiz yapar.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 📱 Ekran Görüntüleri
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### Ana Ekran (Günlük)
+- Kullanıcı duygularını yazar
+- "Analiz Et" butonuna tıklar
+- AI analiz sonucunu görür
+- Sonuç otomatik olarak kaydedilir
 
-## Congratulations! :tada:
+### Geçmiş Ekran
+- Tüm kayıtlar listelenir
+- Her kayıt duygu durumuna göre renklendirilir
+- Haftalık özet istatistikleri gösterilir
+- Offline erişim mevcut
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🎨 Duygu Renkleri
 
-### Now what?
+- 😊 **Pozitif**: Altın sarısı (#FFD700)
+- 😐 **Nötr**: Açık mavi (#87CEEB)
+- 😔 **Negatif**: Gri (#B0B0B0)
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## 📂 Proje Yapısı
 
-# Troubleshooting
+```
+AIGunlukAsistani/
+├── src/
+│   ├── components/      # UI bileşenleri
+│   │   └── EntryCard.tsx
+│   ├── context/         # Context API
+│   │   └── EntriesContext.tsx
+│   ├── screens/         # Ekranlar
+│   │   ├── HomeScreen.tsx
+│   │   └── HistoryScreen.tsx
+│   ├── services/        # API ve Storage servisleri
+│   │   ├── aiService.ts
+│   │   └── storageService.ts
+│   ├── types/           # TypeScript tipleri
+│   │   └── index.ts
+│   └── utils/           # Yardımcı fonksiyonlar
+│       └── helpers.ts
+├── App.tsx              # Ana uygulama
+└── package.json
+```
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Offline Çalışma
+- Tüm veriler AsyncStorage'da saklanır
+- İnternet bağlantısı sadece yeni analiz için gereklidir
+- Geçmiş kayıtlar her zaman erişilebilir
 
-# Learn More
+### Gelecek Geliştirmeler
+- [ ] Grafik ve trend analizi
+- [ ] Bildirim sistemi
+- [ ] Tema değiştirme (dark mode)
+- [ ] Veri dışa aktarma
+- [ ] Çoklu dil desteği
 
-To learn more about React Native, take a look at the following resources:
+## 📄 Lisans
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Bu proje eğitim amaçlı geliştirilmiştir.
+
+## 👨‍💻 Geliştirici
+
+Stajyer Projesi - 3 Günlük Mini Proje
+
+---
+
+## 🤖 AI Araç Kullanımı
+
+Bu proje **Kiro AI** asistanı ile birlikte geliştirilmiştir. Kod yazımı, hata ayıklama ve dokümantasyon süreçlerinde AI desteği alınmıştır.
+
+---
+
+**Not**: Uygulama ücretsiz servisler kullanmaktadır. Hugging Face API token'ı gereklidir.
