@@ -90,6 +90,10 @@ npx react-native run-ios
 API çalışmazsa uygulama otomatik olarak lokal keyword-based analiz yapar.
 
 ## 📱 Ekran Görüntüleri
+<img width="362" height="785" alt="image" src="https://github.com/user-attachments/assets/793c5af5-7587-4b0c-bf3d-3f7db29da12a" />
+
+
+<img width="369" height="797" alt="image" src="https://github.com/user-attachments/assets/0087cdfe-9c3c-49f4-a079-4a5c75c86556" />
 
 ### Ana Ekran (Günlük)
 - Kullanıcı duygularını yazar
